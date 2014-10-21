@@ -21,7 +21,7 @@ def main():
 # Use 'get' or 'post'? pros and cons
 @app.route("/<post_title>")  #methods=['GET','POST'])
 def post(post_title):
-    return render_template("post.html", post_title=post_title )
+    return render_template("post.html", post_title=post_title, post=post )
 
 if __name__ == "__main__":
     app.debug=True

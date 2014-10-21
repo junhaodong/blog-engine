@@ -1,9 +1,13 @@
 #!/usr/bin/python
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import database
 
 app = Flask(__name__)
 
+
+
+# need to fix redirecting! (reading/writing to database works, but
+# the page doesnt refresh after hitting submit
 
 @app.route("/")
 def main():
@@ -23,7 +27,17 @@ def main():
 def post(post_title):
     post = database.getPost(post_title)
     comments = database.getComments(post_title)
-    return render_template("post.html", post_title=post_title, post=post, comments=comments )
+    button = request.args.get("button",None)
+    if button == None:
+        return render_template("post.html", post_title=post_title,
+                                post=post, comments=comments)
+    else:
+        newComment = request.args.get("comment",None)
+        database.insert('comments',post_title,newComment)
+        return render_template("post.html", post_title=post_title,
+                               post=post,comments=comments)
+        #return redirect("0.0.0.0:5000/{0}".format(post_title))
+    
 
 if __name__ == "__main__":
     app.debug=True

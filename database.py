@@ -38,7 +38,7 @@ def getPost(post_title):
 def getComments(post_title):
     conn = sqlite3.connect("p.db")
     c = conn.cursor()
-    q = "SELECT * FROM comments WHERE post_title=='{0}'"
+    q = "SELECT comment FROM comments WHERE post_title=='{0}'"
     q = q.format(post_title)
     results = c.execute(q)
     comments = [r[0] for r in results]

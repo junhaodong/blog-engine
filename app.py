@@ -23,8 +23,6 @@ def main():
 @app.route("/<post_title>")  #methods=['GET','POST'])
 def post(post_title):
     post = database.getPost(post_title)
-    #print post
-    #print 'LOOK AT MEEEEEEEEEEEEE'
     comments = database.getComments(post_title)
     return render_template("post.html", post_title=post_title, post=post, comments=comments )
 

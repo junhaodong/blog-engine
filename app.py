@@ -10,7 +10,6 @@ def main():
     post_title = request.args.get("post_title",None)
     post_body = request.args.get("post_body",None)
     button = request.args.get("button",None)
-    print button
     if button == None:
         titles = database.getTitles()
         return render_template("home.html", titles=titles)

@@ -26,7 +26,7 @@ def insert(table, post_title, text):
 def getPost(post_title):
     conn = sqlite3.connect("p.db")
     c = conn.cursor()
-    q = "SELECT * FROM posts WHERE post_title=='{0}'"
+    q = "SELECT post FROM posts WHERE post_title=='{0}'"
     q = q.format(post_title)
     results = c.execute(q)
     post = [r[0] for r in results]

@@ -10,16 +10,14 @@
         <div class="panel-heading">
             <h4>See posts:</h4>
         </div>
-        <div class="panel-body">
-            <table class="table table-striped">
-                <!--list of hyperlinked post titles here-->
-		{% for title in titles %}
-		<tr>
-		  <td><a href="http://127.0.0.1:5000/{{title}}">{{title}}</a></td>
-		</tr>
-		{% endfor %}
-            </table>
-        </div>
+        
+        <table class="table table-striped">
+            {% for title in titles %}
+            <tr>
+                <td><a href="http://127.0.0.1:5000/{{title}}">{{title}}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
     
     <div class="panel panel-primary">
@@ -32,7 +30,7 @@
                 <br>
                 <textarea class="form-control" name="post_body" rows="15" placeholder="Write a new post here..."></textarea>
 <br>
-                <button type="submit" name="button" class="btn btn-default btn-primary">Create!</button>
+                <center><button type="submit" name="button" class="btn btn-default btn-primary">Create!</button></center>
             </form>
         </div>
     </div>

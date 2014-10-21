@@ -10,6 +10,7 @@ def main():
     post_title = request.args.get("post_title",None)
     post_body = request.args.get("post_body",None)
     button = request.args.get("button",None)
+    print button
     if button == None:
         titles = database.getTitles()
         return render_template("home.html", titles=titles)
@@ -21,10 +22,13 @@ def main():
 # Use 'get' or 'post'? pros and cons
 @app.route("/<post_title>")  #methods=['GET','POST'])
 def post(post_title):
-    return render_template("post.html", post_title=post_title )
+    post = database.getPost(post_title)
+    print post
+    print 'LOOK AT MEEEEEEEEEEEEE'
+    comments = database.getComments(post_title)
+    return render_template("post.html", post_title=post_title, post=post, comments=comments )
 
 if __name__ == "__main__":
     app.debug=True
     database.create()
-    #app.run()
     app.run(host="0.0.0.0",port=5000)

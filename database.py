@@ -27,10 +27,6 @@ def create():
 # May consider using *args to take a variable amount of arguments
 # if we add more columns/values
 def insert(table, post_title, text):
-    #if table == "posts":
-    #    textType = post
-    #else:
-    #    textType = comment
     conn = sqlite3.connect("p.db")
     c = conn.cursor()
     q = "INSERT INTO {0} VALUES('{1}','{2}')"
@@ -47,7 +43,9 @@ def getPost(post_title):
     q = q.format(post_title)
     results = c.execute(q)
     post = [r[0] for r in results]
-    return post
+    conn.commit()
+    conn.close()
+    return post[0]
 
 #return comment from specific post
 def getComments(post_title):  
@@ -57,6 +55,7 @@ def getComments(post_title):
     q = q.format(post_title)
     results = c.execute(q)
     comments = [r[0] for r in results]
+    conn.commit()
     conn.close()
     return comments
 

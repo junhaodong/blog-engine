@@ -11,19 +11,6 @@ def create():
     conn.commit()
     conn.close()
 
-#def populate():
-#    BASE="INSERT INTO posts VALUES('%(title)s',%(post)s)"
-#    for line in csv.DictReader(open("posts.csv")):
-#        q = BASE%line
-#        print q
-#        c.execute(q)
-#    BASE="INSERT INTO comments VALUES('%(post_title)s',%(comment)s)"
-#    for line in csv.DictReader(open("comments.csv")):
-#        q = BASE%line
-#        print q
-#        c.execute(q)
-#    conn.commit()
-
 # May consider using *args to take a variable amount of arguments
 # if we add more columns/values
 def insert(table, post_title, text):
@@ -39,7 +26,7 @@ def insert(table, post_title, text):
 def getPost(post_title):
     conn = sqlite3.connect("p.db")
     c = conn.cursor()
-    q = "SELECT post FROM posts WHERE post_title=={0}"
+    q = "SELECT * FROM posts WHERE post_title=='{0}'"
     q = q.format(post_title)
     results = c.execute(q)
     post = [r[0] for r in results]
@@ -47,11 +34,11 @@ def getPost(post_title):
     conn.close()
     return post[0]
 
-#return comment from specific post
+# Return comment from specific post
 def getComments(post_title):
     conn = sqlite3.connect("p.db")
     c = conn.cursor()
-    q = "SELECT comment FROM comments WHERE post_title=={0}"
+    q = "SELECT * FROM comments WHERE post_title=='{0}'"
     q = q.format(post_title)
     results = c.execute(q)
     comments = [r[0] for r in results]

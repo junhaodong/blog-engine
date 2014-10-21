@@ -36,7 +36,7 @@ def insert(table, post_title, text):
     conn.close()
 
 #return post with specific title
-def getPost(post_title):  
+def getPost(post_title):
     conn = sqlite3.connect("p.db")
     c = conn.cursor()
     q = "SELECT post FROM posts WHERE post_title=={0}"
@@ -48,7 +48,7 @@ def getPost(post_title):
     return post[0]
 
 #return comment from specific post
-def getComments(post_title):  
+def getComments(post_title):
     conn = sqlite3.connect("p.db")
     c = conn.cursor()
     q = "SELECT comment FROM comments WHERE post_title=={0}"

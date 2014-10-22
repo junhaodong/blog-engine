@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block bodycontent %}
+
+<div class="container">
+
+  <div class="panel panel-primary">
+
+    <div class="panel-heading">
+      <center><h4>{{username}}'s Activity</h4></center>
+    </div>
+
+    <!--user's posts-->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	<h4>Posts:</h4>
+      </div>
+      
+      <table class="table table-striped">     
+	{% for p in post %}
+	<tr>
+	  <td><p>{{p}}</p></td>
+	</tr>
+	{%endfor%}
+      </table>
+    </div>
+      
+    <!--user's comments-->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	<h4>Comments:</h4>
+      </div>
+
+      <table class="table table-striped">
+	{% for x in commentposts %}
+	<tr>
+	  <td><p>{{x[0]}}</p>
+	    <br>
+	    {{x[1]}}
+	  </td>
+	</tr>
+	{%endfor%}
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock bodycontent %}

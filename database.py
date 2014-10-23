@@ -1,10 +1,11 @@
 import sqlite3, csv
 
 # Assume no duplicate post_titles
+# resolve using UNIQUE
 def create():
     conn = sqlite3.connect("p.db")
     c = conn.cursor()
-    q = "CREATE TABLE IF NOT EXISTS posts(post_title text, post text)"
+    q = "CREATE TABLE IF NOT EXISTS posts(UNIQUE post_title text, post text)"
     c.execute(q)
     q = "CREATE TABLE IF NOT EXISTS comments(post_title text, comment text)"
     c.execute(q)

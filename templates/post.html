@@ -8,24 +8,28 @@
             <center><h4>{{post_title}}</h4></center>
         </div>
         
-        <!--post body here-->
         <div class="panel-body">
-            <p>{{post}}</p>
+	  <!--post body-->
+	  {% for post in posts %}
+          <p>
+	    {{post}}
+	  </p>
+	  {% endfor %}
         </div>
     </div>
 
-    <!--table of comments here-->
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4>Comments:</h4>
         </div>
-    
+
+	<!--table of comments-->
         <table class="table table-striped">
-            {% for x in comments %}
+            {% for comment in comments %}
             <tr>
-                <td><p>{{x}}<p></td>
+                <td><p>{{comment}}<p></td>
             </tr>
-            {%endfor%}
+            {% endfor %}
         </table>
     </div>
     
@@ -39,7 +43,7 @@
                 <textarea class="form-control" name="comment" rows="15" placeholder="Write your commment here..."></textarea>
                 <br>
                 <center>
-                    <button type="submit" name="button" class="btn btn-default btn-primary">Comment!</button>
+                    <button type="submit" name="comment_button" class="btn btn-default btn-primary">Comment!</button>
                 </center>
             </form>
         </div>

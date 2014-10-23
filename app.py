@@ -1,46 +1,41 @@
 #!/usr/bin/python
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import database
 
 app = Flask(__name__)
-
-
-
-# need to fix redirecting! (reading/writing to database works, but
-# the page doesnt refresh after hitting submit
 
 @app.route("/")
 def main():
     post_title = request.args.get("post_title",None)
     post_body = request.args.get("post_body",None)
-    button = request.args.get("button",None)
-    if button == None:
+    post_button = request.args.get("post_button",None)
+
+    if post_button == None:
         titles = database.getTitles()
         return render_template("home.html", titles=titles)
     else:
         database.insert('posts',post_title,post_body)
-        return post(post_title)
+        return redirect(url_for('post',post_title=post_title))
 
-# SEE FLASK DOCUMENTATION regarding <post_title>
-# Use 'get' or 'post'? pros and cons
-@app.route("/<post_title>")  #methods=['GET','POST'])
+@app.route("/<post_title>")
 def post(post_title):
-    post = database.getPost(post_title)
-    comments = database.getComments(post_title)
-    button = request.args.get("button",None)
-    if button == None:
-        return render_template("post.html", post_title=post_title,
-                                post=post, comments=comments)
+    posts = database.getPost(post_title)
+    comment_button = request.args.get("comment_button",None)
+
+    if comment_button == None:
+        comments = database.getComments(post_title)
+        return render_template("post.html",
+                               post_title=post_title, 
+                               posts=posts,comments=comments)
     else:
         newComment = request.args.get("comment",None)
         database.insert('comments',post_title,newComment)
-        return render_template("post.html", post_title=post_title,
-                               post=post,comments=comments)
-        #return redirect("0.0.0.0:5000/{0}".format(post_title))
-    
+        comments = database.getComments(post_title)
+        return render_template("post.html",
+                               post_title=post_title,
+                               posts=posts,comments=comments)
 
 if __name__ == "__main__":
-    app.debug=True
+    #app.debug=True
     database.create()
     app.run()
-    #app.run(host="0.0.0.0",port=5000)

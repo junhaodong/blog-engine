@@ -1,4 +1,4 @@
-import sqlite3, csv
+import sqlite3
 
 # Assume no duplicate post_titles
 def create():
@@ -22,7 +22,18 @@ def insert(table, post_title, text):
     conn.commit()
     conn.close()
 
-#return post with specific title
+# Note: all `get` functions return lists
+
+def getTitles():
+    conn = sqlite3.connect("p.db")
+    c = conn.cursor()
+    q = "SELECT post_title FROM posts"
+    results = c.execute(q)
+    titles = [r[0] for r in results]
+    conn.commit()
+    conn.close()
+    return titles
+
 def getPost(post_title):
     conn = sqlite3.connect("p.db")
     c = conn.cursor()
@@ -32,9 +43,8 @@ def getPost(post_title):
     post = [r[0] for r in results]
     conn.commit()
     conn.close()
-    return post[0]
+    return post
 
-# Return comment from specific post
 def getComments(post_title):
     conn = sqlite3.connect("p.db")
     c = conn.cursor()
@@ -45,13 +55,3 @@ def getComments(post_title):
     conn.commit()
     conn.close()
     return comments
-
-# Returns a list of titles
-def getTitles():
-    conn = sqlite3.connect("p.db")
-    c = conn.cursor()
-    q = "SELECT post_title FROM posts"
-    results = c.execute(q)
-    titles = [r[0] for r in results]
-    conn.close()
-    return titles

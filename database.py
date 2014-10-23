@@ -1,6 +1,7 @@
 import sqlite3
 
 # Assume no duplicate post_titles
+# resolve using UNIQUE
 def create():
     conn = sqlite3.connect("p.db")
     c = conn.cursor()
@@ -11,8 +12,6 @@ def create():
     conn.commit()
     conn.close()
 
-# May consider using *args to take a variable amount of arguments
-# if we add more columns/values
 def insert(table, post_title, text):
     conn = sqlite3.connect("p.db")
     c = conn.cursor()

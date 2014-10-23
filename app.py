@@ -5,10 +5,6 @@ import database
 app = Flask(__name__)
 
 
-
-# need to fix redirecting! (reading/writing to database works, but
-# the page doesnt refresh after hitting submit
-
 @app.route("/")
 def main():
     post_title = request.args.get("post_title",None)

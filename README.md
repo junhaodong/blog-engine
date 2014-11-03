@@ -3,4 +3,4 @@
 Junhao Dong, Elia Portnoy, Jenny Baran, Eric Wong  
 SoftDev Period 5
 
-Stores a single blog where people can add comments to posts.
+Stores a single blog (using sqlite3) where people can create and view posts and comment on posts.
